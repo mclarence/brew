@@ -87,7 +87,7 @@ then
   odie "Cowardly refusing to continue at this prefix: $HOMEBREW_PREFIX"
 fi
 
-HOMEBREW_SYSTEM="$(uname -s)"
+HOMEBREW_SYSTEM="$(/home/mclarence/bin/uname -s)"
 case "$HOMEBREW_SYSTEM" in
   Darwin) HOMEBREW_MACOS="1" ;;
   Linux)  HOMEBREW_LINUX="1" ;;
@@ -95,7 +95,7 @@ esac
 
 if [[ -n "$HOMEBREW_MACOS" ]]
 then
-  HOMEBREW_PROCESSOR="$(uname -p)"
+  HOMEBREW_PROCESSOR="$(/home/mclarence/bin/uname -p)"
   HOMEBREW_PRODUCT="Homebrew"
   HOMEBREW_SYSTEM="Macintosh"
   # This is i386 even on x86_64 machines
@@ -151,10 +151,10 @@ then
     HOMEBREW_MACOS_SYSTEM_RUBY_NEW_ENOUGH="1"
   fi
 else
-  HOMEBREW_PROCESSOR="$(uname -m)"
+  HOMEBREW_PROCESSOR="$(/home/mclarence/bin/uname -m)"
   HOMEBREW_PRODUCT="${HOMEBREW_SYSTEM}brew"
   [[ -n "$HOMEBREW_LINUX" ]] && HOMEBREW_OS_VERSION="$(lsb_release -sd 2>/dev/null)"
-  : "${HOMEBREW_OS_VERSION:=$(uname -r)}"
+  : "${HOMEBREW_OS_VERSION:=$(/home/mclarence/bin/uname -r)}"
   HOMEBREW_OS_USER_AGENT_VERSION="$HOMEBREW_OS_VERSION"
 
   # Ensure the system Curl is a version that supports modern HTTPS certificates.
